@@ -436,9 +436,11 @@ class _HomePageState extends State<HomePage> {
       }
     } else {
       // for desktop
-      final path = await FilePicker.platform.saveFile(
+      final uri = await FilePicker.saveFile(
         fileName: 'document.${fileType.extension}',
+        bytes: Uint8List(0),
       );
+      final path = uri?.toFilePath();
       if (path != null) {
         await File(path).writeAsString(result);
         if (fileType == ExportFileType.pdf) {
@@ -464,25 +466,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _importFile(ExportFileType fileType) async {
-    final result = await FilePicker.platform.pickFiles(
-      allowMultiple: false,
+    final file = await FilePicker.pickFile(
       allowedExtensions: [fileType.extension],
       type: FileType.custom,
     );
-    var plainText = '';
-    if (!kIsWeb) {
-      final path = result?.files.single.path;
-      if (path == null) {
-        return;
-      }
-      plainText = await File(path).readAsString();
-    } else {
-      final bytes = result?.files.first.bytes;
-      if (bytes == null) {
-        return;
-      }
-      plainText = const Utf8Decoder().convert(bytes);
+    if (file == null) {
+      return;
     }
+    final plainText = await file.xFile.readAsString();
 
     var jsonString = '';
     switch (fileType) {

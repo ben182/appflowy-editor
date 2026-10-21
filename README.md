@@ -1,3 +1,13 @@
+> **Fork für [Zentrale](https://github.com/ben182/zentrale)** (ADR 0010).
+> Upstream-Stand: `AppFlowy-IO/appflowy-editor@01eccc6e` (6.1.0, main vom 2026-08-06).
+> Patches auf diesem Stand, Branch `zentrale`:
+>
+> - `file_picker` ^13.1.0 statt ^10.3.10: `file_picker_impl.dart` nutzt die statische API
+>   (`FilePicker.pickFile`, `pickFiles`, `saveFile`, `getDirectoryPath`), Bytes kommen über
+>   `PlatformFile.xFile`. `saveFile` legt eine leere Datei an und gibt den Pfad zurück,
+>   damit die Signatur des `FilePickerService` gleich bleibt.
+> - `device_info_plus` ^13.0.0 statt ^12.3.0, damit `win32` ^6 auflöst.
+
 <!--
 This README describes the package. If you publish this package to pub.dev,
 this README's contents appear on the landing page for your package.
