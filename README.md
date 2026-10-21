@@ -7,6 +7,9 @@
 >   `PlatformFile.xFile`. `saveFile` legt eine leere Datei an und gibt den Pfad zurück,
 >   damit die Signatur des `FilePickerService` gleich bleibt.
 > - `device_info_plus` ^13.0.0 statt ^12.3.0, damit `win32` ^6 auflöst.
+> - PDF-Plugin (`PdfHTMLEncoder`) und die Abhängigkeit `pdf` entfernt: `pdf` hält `archive`
+>   unter 4.1 (oder braucht `xml` ^7, das mit `enough_mail` kollidiert), und mit `archive`
+>   4.0 kompiliert `image` 4.11 nicht.
 
 <!--
 This README describes the package. If you publish this package to pub.dev,

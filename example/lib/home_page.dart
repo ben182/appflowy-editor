@@ -24,7 +24,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:printing/printing.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_platform/universal_platform.dart';
 
@@ -310,10 +309,6 @@ class _HomePageState extends State<HomePage> {
             _exportFile(_editorState, ExportFileType.markdown);
           }),
 
-          _buildListTile(context, 'Export to PDF', () {
-            _exportFile(_editorState, ExportFileType.pdf);
-          }),
-
           // Decoder Demo
           _buildSeparator(context, 'Import From X Demo'),
           _buildListTile(context, 'Import From Document JSON', () {
@@ -443,17 +438,6 @@ class _HomePageState extends State<HomePage> {
       final path = uri?.toFilePath();
       if (path != null) {
         await File(path).writeAsString(result);
-        if (fileType == ExportFileType.pdf) {
-          final pdf = await PdfHTMLEncoder(
-            fontFallback: [
-              await PdfGoogleFonts.notoColorEmoji(),
-              await PdfGoogleFonts.notoColorEmojiRegular(),
-            ],
-          ).convert(result);
-
-          await File(path).writeAsBytes(await pdf.save());
-        }
-
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
