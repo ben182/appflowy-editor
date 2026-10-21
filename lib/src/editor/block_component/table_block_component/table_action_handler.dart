@@ -67,10 +67,12 @@ class _TableActionHandlerState extends State<TableActionHandler> {
     if (selection == null) return false;
     final table = widget.node.path;
     final at = selection.start.path;
-    if (at.length <= table.length || !at.sublist(0, table.length).equals(table)) {
+    if (at.length <= table.length ||
+        !at.sublist(0, table.length).equals(table)) {
       return false;
     }
-    final cell = widget.editorState.getNodeAtPath([...table, at[table.length]]);
+    final cell =
+        widget.editorState.getNodeAtPath([...table, at[table.length]]);
     final key = widget.dir == TableDirection.col
         ? TableCellBlockKeys.colPosition
         : TableCellBlockKeys.rowPosition;
@@ -84,8 +86,7 @@ class _TableActionHandlerState extends State<TableActionHandler> {
       transform: widget.transform,
       height: widget.height,
       child: Visibility(
-        visible:
-            (widget.visible || _visible || _menuShown || _hasCursor) &&
+        visible: (widget.visible || _visible || _menuShown || _hasCursor) &&
             widget.editorState.editable,
         child: MouseRegion(
           onEnter: (_) => setState(() => _visible = true),
@@ -124,7 +125,13 @@ Widget defaultMenuBuilder(
     child: MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () => showActionMenu(context, node, editorState, position, dir),
+        onTap: () => showActionMenu(
+          context,
+          node,
+          editorState,
+          position,
+          dir,
+        ),
         child: dir == TableDirection.col
             ? Transform.rotate(
                 angle: math.pi / 2,
