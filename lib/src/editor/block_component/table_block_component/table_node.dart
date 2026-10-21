@@ -4,9 +4,8 @@ import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:appflowy_editor/src/editor/block_component/table_block_component/table_config.dart';
 
 class TableNode {
-  TableNode({
-    required this.node,
-  }) : _config = TableConfig.fromJson(node.attributes) {
+  TableNode({required this.node})
+    : _config = TableConfig.fromJson(node.attributes) {
     if (node.type != TableBlockKeys.type) {
       AppFlowyEditorLog.editor.debug('TableNode: node is not a table');
 
@@ -40,8 +39,9 @@ class TableNode {
     for (final child in node.children) {
       if (!child.attributes.containsKey(TableCellBlockKeys.rowPosition) ||
           !child.attributes.containsKey(TableCellBlockKeys.colPosition)) {
-        AppFlowyEditorLog.editor
-            .debug('TableNode: cell has no rowPosition or colPosition');
+        AppFlowyEditorLog.editor.debug(
+          'TableNode: cell has no rowPosition or colPosition',
+        );
 
         return;
       }
@@ -82,9 +82,7 @@ class TableNode {
     assert(
       T == String ||
           (T == Node &&
-              cols.every(
-                (col) => col.every((n) => (n as Node).delta != null),
-              )),
+              cols.every((col) => col.every((n) => (n as Node).delta != null))),
     );
     assert(cols.isNotEmpty);
     assert(cols[0].isNotEmpty);
@@ -205,14 +203,13 @@ class TableNode {
         }
 
         if (transaction != null) {
-          transaction.updateNode(
-            _cells[i][row],
-            {TableCellBlockKeys.height: maxHeight},
-          );
+          transaction.updateNode(_cells[i][row], {
+            TableCellBlockKeys.height: maxHeight,
+          });
         } else {
-          _cells[i][row].updateAttributes(
-            {TableCellBlockKeys.height: maxHeight},
-          );
+          _cells[i][row].updateAttributes({
+            TableCellBlockKeys.height: maxHeight,
+          });
         }
       }
     }

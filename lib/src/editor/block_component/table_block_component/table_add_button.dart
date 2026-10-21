@@ -1,3 +1,4 @@
+import 'package:appflowy_editor/src/editor/util/platform_extension.dart';
 import 'package:flutter/material.dart';
 
 class TableActionButton extends StatefulWidget {
@@ -33,7 +34,8 @@ class _TableActionButtonState extends State<TableActionButton> {
         onExit: (_) => setState(() => _visible = false),
         child: Center(
           child: Visibility(
-            visible: _visible,
+            // Touch: kein Überfahren, der Knopf ist immer da.
+            visible: _visible || PlatformExtension.isMobile,
             child: Card(
               elevation: 1.0,
               child: MouseRegion(
