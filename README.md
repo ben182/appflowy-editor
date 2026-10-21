@@ -7,6 +7,8 @@
 >   `PlatformFile.xFile`. `saveFile` legt eine leere Datei an und gibt den Pfad zurück,
 >   damit die Signatur des `FilePickerService` gleich bleibt.
 > - `device_info_plus` ^13.0.0 statt ^12.3.0, damit `win32` ^6 auflöst.
+> - `keyboard_height_plugin` ^0.3.0 statt ^0.1.5: 0.1.5 kompiliert gegen Android-API 31, die
+>   AndroidX-Bibliotheken der App verlangen mindestens 34.
 > - PDF-Plugin (`PdfHTMLEncoder`) und die Abhängigkeit `pdf` entfernt: `pdf` hält `archive`
 >   unter 4.1 (oder braucht `xml` ^7, das mit `enough_mail` kollidiert), und mit `archive`
 >   4.0 kompiliert `image` 4.11 nicht.
